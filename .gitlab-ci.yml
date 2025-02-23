@@ -1,0 +1,18 @@
+stages:
+  - deploy
+deploy:
+  image: google/cloud-sdk:alpine
+  stage: deploy
+  script:
+    # Set up Google Cloud authentication
+    - echo $GCP_SERVICE_ACCOUNT_KEY | base64 --decode > /tmp/key.json
+    - gcloud auth activate-service-account --key-file /tmp/key.json
+    - gcloud config set project k8s-gozd
+    - gcloud container clusters get-credentials <CLUSTER_NAME> --zone <ZONE> --project k8s-gozd
+    # Install Helm
+    - curl https://get.helm.sh/helm-v3.10.1-linux-amd64.tar.gz | tar xz
+    - mv linux-amd64/helm /usr/local/bin/
+    # Deploy using Helm (ensure you have a Helm chart for HTTPD)
+    - helm upgrade --install httpd-app ./helm/httpd-app --namespace default
+  only:
+    - main # Deploy only from the main branch
