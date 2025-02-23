@@ -17,7 +17,7 @@ This repository is focused on setting up a **multi-node Kubernetes cluster** usi
   
 ### 2. **Terraform Infrastructure Setup**
 - We initialized **Terraform** to manage GKE cluster infrastructure.
-- A **`main.tf`** file was created to set up the **Google provider** and **authentication**.
+- A **`gke.tf`** file was created to set up the **Google provider** and **authentication**.
   - **Service Account** permissions: `roles/container.admin`, `roles/compute.admin`, and `roles/iam.serviceAccountUser`.
 - The **node pool** was configured with resource specifications:
   - **Machine Type**: `e2-medium`  
