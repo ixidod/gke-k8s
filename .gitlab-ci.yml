@@ -24,3 +24,7 @@ deploy:
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"' # Run only on the main branch
 
+    # Deploy using Helm (ensure you have a Helm chart for HTTPD)
+    - helm upgrade --install httpd-app ./helm/httpd-app --namespace default
+  only:
+    - master # Deploy only from the main branch
