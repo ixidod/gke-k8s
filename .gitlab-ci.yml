@@ -15,4 +15,4 @@ deploy:
     # Deploy using Helm (ensure you have a Helm chart for HTTPD)
     - helm upgrade --install httpd-app ./helm/httpd-app --namespace default
   only:
-    - main # Deploy only from the main branch
+    - master # Deploy only from the main branch
